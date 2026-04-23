@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Les Déterminants — 4ème Année Primaire</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800;900&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --blue:#1a5cb8;--blue2:#3b82f6;--blue-light:#dbeafe;
+  --gold:#f59e0b;--gold2:#fde68a;
+  --green:#059669;--green2:#d1fae5;
+  --red:#dc2626;--red2:#fee2e2;
+  --purple:#7c3aed;--purple2:#ede9fe;
+  --orange:#f97316;
+  --bg-sky:#e0f2fe;
+  --card:#fff;
+  --txt:#1e293b;
+  --txt2:#64748b;
+  --radius:20px;
+}
+body{font-family:'Quicksand',sans-serif;color:var(--txt);min-height:100vh;overflow-x:hidden;background:var(--bg-sky);}
+
+/* ===== ANIMATIONS ===== */
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-16px);}}
+@keyframes floatB{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-12px) rotate(8deg);}}
+@keyframes floatC{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px) rotate(-6deg);}}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.07);}}
+@keyframes glow{0%,100%{box-shadow:0 0 12px rgba(245,158,11,0.4);}50%{box-shadow:0 0 32px rgba(245,158,11,0.9),0 0 60px rgba(251,191,36,0.4);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-22px);}to{opacity:1;transform:translateY(0);}}
+@keyframes bounceIn{0%{transform:scale(0.2);opacity:0;}60%{transform:scale(1.15);}80%{transform:scale(0.95);}100%{transform:scale(1);opacity:1;}}
+@keyframes correctPop{0%{transform:scale(1);}40%{transform:scale(1.22);}100%{transform:scale(1);}}
+@keyframes wrongShake{0%,100%{transform:translateX(0);}20%{transform:translateX(-8px);}40%{transform:translateX(8px);}60%{transform:translateX(-5px);}80%{transform:translateX(5px);}}
+@keyframes confettiFall{0%{transform:translateY(-10px) rotate(0deg);opacity:1;}100%{transform:translateY(140px) rotate(720deg);opacity:0;}}
+@keyframes starTwinkle{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.25;transform:scale(0.5);}}
+@keyframes cloudMove{0%{transform:translateX(-130%);}100%{transform:translateX(120vw);}}
+@keyframes rainbowShift{0%,100%{filter:hue-rotate(0deg);}50%{filter:hue-rotate(30deg);}}
+@keyframes slideLeft{from{opacity:0;transform:translateX(40px);}to{opacity:1;transform:translateX(0);}}
+@keyframes slideRight{from{opacity:0;transform:translateX(-40px);}to{opacity:1;transform:translateX(0);}}
+@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+@keyframes wave{0%,100%{transform:rotate(0deg);}25%{transform:rotate(12deg);}75%{transform:rotate(-12deg);}}
+@keyframes shimmer{0%{background-position:-200% center;}100%{background-position:200% center;}}
+@keyframes tada{0%{transform:scale(1);}10%,20%{transform:scale(0.9) rotate(-3deg);}30%,50%,70%,90%{transform:scale(1.1) rotate(3deg);}40%,60%,80%{transform:scale(1.1) rotate(-3deg);}100%{transform:scale(1) rotate(0);}}
+@keyframes particle{0%{transform:translate(0,0) scale(1);opacity:1;}100%{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0;}}
+@keyframes morphBlob{0%,100%{border-radius:60% 40% 30% 70%/60% 30% 70% 40%;}50%{border-radius:30% 60% 70% 40%/50% 60% 30% 60%;}}
+
+/* ===== PARTICLES BG ===== */
+.particles-bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.p-dot{position:absolute;border-radius:50%;animation:starTwinkle 3s ease-in-out infinite;}
+
+/* ===== COVER ===== */
+#cover{
+  min-height:100vh;
+  background:linear-gradient(150deg,#0f172a 0%,#1e3a6e 40%,#1e40af 70%,#312e81 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:2rem;text-align:center;position:relative;overflow:hidden;
+}
+.cv-moon{position:absolute;top:50px;right:10%;font-size:58px;animation:float 7s ease-in-out infinite;filter:drop-shadow(0 0 20px rgba(253,224,71,0.8));}
+.cv-rocket{position:absolute;bottom:15%;left:6%;font-size:44px;animation:floatB 5s ease-in-out infinite;}
+.cv-star1{position:absolute;top:8%;left:6%;font-size:30px;animation:starTwinkle 2s ease-in-out infinite;}
+.cv-star2{position:absolute;top:20%;right:5%;font-size:22px;animation:starTwinkle 2.5s ease-in-out infinite 0.5s;}
+.cv-star3{position:absolute;bottom:25%;right:8%;font-size:26px;animation:starTwinkle 1.8s ease-in-out infinite 1s;}
+.cv-book{position:absolute;top:12%;left:15%;font-size:36px;animation:floatC 6s ease-in-out infinite;}
+.cv-pencil{position:absolute;bottom:20%;right:14%;font-size:32px;animation:floatB 4.5s ease-in-out infinite 1.5s;}
+.cv-planet{position:absolute;width:70px;height:70px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#f59e0b,#b45309);top:18%;left:80%;animation:float 9s ease-in-out infinite 2s;box-shadow:0 0 24px rgba(245,158,11,0.4);}
+.cv-planet2{position:absolute;width:45px;height:45px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#c084fc,#7c3aed);bottom:30%;left:3%;animation:float 7s ease-in-out infinite;box-shadow:0 0 16px rgba(192,132,252,0.4);}
+.cv-logo{width:96px;height:96px;background:linear-gradient(135deg,#f59e0b,#fbbf24);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:46px;margin:0 auto 1rem;animation:glow 2.5s ease-in-out infinite,bounceIn 0.9s ease-out;position:relative;z-index:2;}
+.cv-school{font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:0.6rem;animation:fadeDown 0.8s ease-out 0.2s both;position:relative;z-index:2;}
+.cv-box{background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.15);border-radius:30px;padding:2.2rem 2.8rem;max-width:540px;width:100%;margin-bottom:1.4rem;backdrop-filter:blur(16px);animation:fadeUp 0.8s ease-out 0.3s both;position:relative;z-index:2;}
+.cv-tag{display:inline-block;background:linear-gradient(90deg,#f59e0b,#fde68a);color:#1e3a6e;font-size:11px;font-weight:800;border-radius:20px;padding:4px 18px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;}
+.cv-title{font-family:'Baloo 2',cursive;font-size:50px;font-weight:900;color:#fff;line-height:1.05;text-shadow:0 4px 28px rgba(0,0,0,0.5);margin-bottom:6px;}
+.cv-title span{color:#fde68a;display:inline-block;animation:pulse 2s ease-in-out infinite;}
+.cv-sub{font-size:15px;color:rgba(255,255,255,0.65);font-weight:600;}
+.cv-lvl{display:inline-block;background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.28);color:#fff;border-radius:20px;padding:5px 20px;font-size:14px;font-weight:700;margin-top:12px;}
+.cv-info{display:flex;flex-direction:column;gap:10px;max-width:500px;width:100%;margin-bottom:1.8rem;animation:fadeUp 0.8s ease-out 0.5s both;position:relative;z-index:2;}
+.cv-ic{background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.15);border-radius:16px;padding:12px 20px;display:flex;align-items:center;gap:14px;text-align:left;transition:all 0.25s;}
+.cv-ic:hover{background:rgba(255,255,255,0.14);transform:translateX(6px);}
+.cv-ic-icon{font-size:24px;min-width:34px;}
+.cv-ic-lbl{font-size:11px;color:#fde68a;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+.cv-ic-val{font-size:14px;color:#fff;font-weight:600;margin-top:2px;}
+.cv-nav{display:flex;flex-direction:column;gap:12px;max-width:500px;width:100%;animation:fadeUp 0.8s ease-out 0.65s both;position:relative;z-index:2;}
+.cv-btn-main{background:linear-gradient(135deg,#f59e0b,#fde68a);color:#1e3a6e;font-size:19px;font-weight:900;border:none;border-radius:50px;padding:17px 50px;cursor:pointer;font-family:inherit;animation:glow 2s ease-in-out 1.5s infinite;transition:transform 0.15s,box-shadow 0.15s;}
+.cv-btn-main:hover{transform:scale(1.06) translateY(-3px);}
+.cv-btn-row{display:flex;gap:10px;}
+.cv-btn-sec{flex:1;background:rgba(255,255,255,0.09);border:1.5px solid rgba(255,255,255,0.2);color:#fff;font-size:15px;font-weight:700;border-radius:20px;padding:13px 16px;cursor:pointer;font-family:inherit;transition:all 0.2s;}
+.cv-btn-sec:hover{background:rgba(255,255,255,0.2);transform:translateY(-2px);}
+.cv-badges{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:1.2rem;position:relative;z-index:2;animation:fadeUp 0.8s ease-out 0.85s both;}
+.cv-badge{background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.8);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:700;transition:all 0.2s;cursor:default;}
+.cv-badge:hover{background:rgba(255,255,255,0.2);transform:translateY(-2px);}
+
+/* ===== MAIN CONTAINER ===== */
+#main{display:none;min-height:100vh;position:relative;}
+.main-bg{position:fixed;inset:0;z-index:0;background:linear-gradient(165deg,#dbeafe 0%,#e0f2fe 40%,#bfdbfe 70%,#ede9fe 100%);}
+
+/* decorative blobs */
+.blob{position:fixed;border-radius:50%;opacity:0.2;pointer-events:none;z-index:0;animation:morphBlob 12s ease-in-out infinite;}
+.blob1{width:320px;height:320px;background:var(--blue2);top:-80px;left:-80px;}
+.blob2{width:240px;height:240px;background:var(--gold);bottom:-60px;right:-60px;animation-delay:4s;}
+.blob3{width:180px;height:180px;background:var(--purple);top:40%;right:-40px;animation-delay:8s;}
+
+/* ===== TOPBAR ===== */
+.topbar{background:linear-gradient(90deg,#1e3a6e,#1a5cb8,#2563eb);padding:0.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 4px 24px rgba(30,58,110,0.4);}
+.topbar-left{display:flex;align-items:center;gap:12px;}
+.topbar-icon{width:42px;height:42px;background:linear-gradient(135deg,#f59e0b,#fde68a);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;animation:pulse 3s ease-in-out infinite;}
+.topbar-title{font-family:'Baloo 2',cursive;font-size:19px;font-weight:800;color:#fff;}
+.topbar-sub{font-size:11px;color:rgba(255,255,255,0.6);}
+.back-btn{background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.25);color:#fff;border-radius:20px;padding:7px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.2s;}
+.back-btn:hover{background:rgba(255,255,255,0.25);transform:translateX(-3px);}
+
+/* ===== TABS ===== */
+.tabs{display:flex;background:rgba(255,255,255,0.94);border-bottom:2px solid #bfdbfe;padding:0 1.5rem;overflow-x:auto;position:sticky;top:64px;z-index:90;backdrop-filter:blur(12px);box-shadow:0 4px 16px rgba(59,130,246,0.08);}
+.tab{padding:14px 16px;font-size:13px;font-weight:700;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;color:#94a3b8;transition:all 0.22s;white-space:nowrap;font-family:inherit;display:flex;align-items:center;gap:6px;}
+.tab.active{color:var(--blue);border-bottom-color:var(--blue);}
+.tab:hover{background:#f0f5ff;color:var(--blue);}
+.tab-emoji{font-size:16px;}
+
+/* ===== CONTENT ===== */
+.content{max-width:860px;margin:2rem auto;padding:0 1.2rem 6rem;position:relative;z-index:10;}
+.game-panel{display:none;}
+.game-panel.active{display:block;animation:fadeUp 0.45s ease-out;}
+
+/* ===== LESSON PAGE ===== */
+.lesson-hero{background:linear-gradient(135deg,#1e3a6e,#1a5cb8,#7c3aed);border-radius:28px;padding:2rem 2.5rem;margin-bottom:2rem;position:relative;overflow:hidden;box-shadow:0 8px 40px rgba(30,58,110,0.35);}
+.lesson-hero::before{content:'';position:absolute;right:-40px;top:-40px;width:200px;height:200px;background:rgba(255,255,255,0.05);border-radius:50%;}
+.lesson-hero::after{content:'';position:absolute;left:30px;bottom:-50px;width:150px;height:150px;background:rgba(255,255,255,0.04);border-radius:50%;}
+.lesson-hero-top{display:flex;align-items:center;gap:16px;margin-bottom:1.5rem;position:relative;z-index:1;}
+.lesson-hero-icon{font-size:48px;animation:float 3.5s ease-in-out infinite;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.3));}
+.lesson-hero h1{font-family:'Baloo 2',cursive;font-size:36px;font-weight:900;color:#fff;text-shadow:0 3px 16px rgba(0,0,0,0.3);}
+.lesson-hero p{font-size:14px;color:rgba(255,255,255,0.7);margin-top:4px;}
+.lesson-objectifs{display:flex;flex-wrap:wrap;gap:10px;position:relative;z-index:1;}
+.obj-chip{background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.25);color:#fff;border-radius:20px;padding:6px 16px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px;}
+
+/* LESSON SECTIONS */
+.lesson-section{background:rgba(255,255,255,0.96);border-radius:24px;padding:2rem 2.2rem;margin-bottom:1.5rem;box-shadow:0 6px 30px rgba(30,58,110,0.1);border:1.5px solid rgba(191,219,254,0.6);position:relative;overflow:hidden;}
+.lesson-section::before{content:'';position:absolute;top:0;left:0;width:6px;height:100%;border-radius:4px 0 0 4px;}
+.ls-blue::before{background:linear-gradient(180deg,var(--blue),var(--blue2));}
+.ls-gold::before{background:linear-gradient(180deg,var(--gold),#fde68a);}
+.ls-green::before{background:linear-gradient(180deg,var(--green),#34d399);}
+.ls-purple::before{background:linear-gradient(180deg,var(--purple),#c084fc);}
+.ls-orange::before{background:linear-gradient(180deg,var(--orange),#fdba74);}
+
+.section-title{font-family:'Baloo 2',cursive;font-size:22px;font-weight:800;color:var(--txt);margin-bottom:1.2rem;display:flex;align-items:center;gap:10px;}
+.section-icon{font-size:26px;animation:float 4s ease-in-out infinite;}
+
+/* OBSERVE BOX */
+.observe-box{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:2px solid #bfdbfe;border-radius:18px;padding:1.5rem 1.8rem;margin-bottom:1.2rem;position:relative;}
+.observe-badge{background:var(--blue);color:#fff;font-size:11px;font-weight:800;border-radius:20px;padding:4px 14px;letter-spacing:1px;text-transform:uppercase;display:inline-block;margin-bottom:10px;}
+.observe-text{font-size:15px;line-height:1.75;color:#374151;}
+.observe-text strong{color:var(--blue);font-weight:800;}
+
+/* RETAIN BOX */
+.retain-box{background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid #f59e0b;border-radius:18px;padding:1.5rem 1.8rem;margin-bottom:1.2rem;}
+.retain-badge{background:var(--gold);color:#78350f;font-size:11px;font-weight:800;border-radius:20px;padding:4px 14px;letter-spacing:1px;text-transform:uppercase;display:inline-block;margin-bottom:10px;}
+.retain-text{font-size:15px;line-height:1.75;color:#374151;}
+.retain-def{font-size:16px;font-weight:700;color:#92400e;margin-bottom:12px;padding:12px 16px;background:rgba(255,255,255,0.6);border-radius:12px;border-left:4px solid var(--gold);}
+
+/* DET TABLE */
+.det-table-wrap{overflow-x:auto;margin:1rem 0;}
+.det-table{width:100%;border-collapse:separate;border-spacing:0;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(30,58,110,0.1);}
+.det-table th{background:linear-gradient(90deg,#1e3a6e,#1a5cb8);color:#fff;font-size:13px;font-weight:800;padding:12px 16px;text-align:center;letter-spacing:0.5px;}
+.det-table td{background:#fff;border-bottom:1px solid #e2e8f0;padding:12px 16px;text-align:center;font-size:15px;font-weight:700;transition:background 0.2s;}
+.det-table tr:last-child td{border-bottom:none;}
+.det-table tr:hover td{background:#eff6ff;}
+.det-table .row-label{background:#eff6ff;color:var(--blue);font-weight:800;text-align:left;}
+.det-chip{display:inline-block;padding:4px 14px;border-radius:20px;font-size:15px;font-weight:800;margin:3px;}
+.dc-art{background:#dbeafe;color:#1e40af;}
+.dc-pos{background:#fef3c7;color:#92400e;}
+.dc-dem{background:#fce7f3;color:#9d174d;}
+.dc-num{background:#d1fae5;color:#065f46;}
+
+/* EXAMPLES */
+.examples-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px;}
+.ex-card{background:#f8faff;border:1.5px solid #dbeafe;border-radius:14px;padding:14px 16px;transition:all 0.2s;}
+.ex-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(59,130,246,0.15);}
+.ex-det{font-size:22px;font-weight:900;color:var(--blue);margin-bottom:4px;}
+.ex-phrase{font-size:13px;color:#475569;font-style:italic;}
+.ex-label{font-size:11px;color:#94a3b8;font-weight:700;letter-spacing:0.5px;margin-top:4px;text-transform:uppercase;}
+
+/* RULE CARDS */
+.rule-card{border-radius:16px;padding:16px 20px;margin-bottom:10px;display:flex;align-items:flex-start;gap:14px;}
+.rc-blue{background:#eff6ff;border:1.5px solid #bfdbfe;}
+.rc-gold{background:#fffbeb;border:1.5px solid #fde68a;}
+.rc-green{background:#f0fdf4;border:1.5px solid #bbf7d0;}
+.rc-purple{background:#faf5ff;border:1.5px solid #ddd6fe;}
+.rule-icon{font-size:24px;min-width:32px;margin-top:2px;}
+.rule-text{font-size:14px;line-height:1.65;color:#374151;}
+.rule-text strong{color:var(--blue);font-weight:800;}
+.rule-text .highlight{background:#fde68a;padding:2px 8px;border-radius:6px;font-weight:800;color:#78350f;}
+
+/* ===== ACTIVITIES PAGE ===== */
+.act-hero{background:linear-gradient(135deg,#059669,#34d399,#10b981);border-radius:28px;padding:2rem 2.5rem;margin-bottom:2rem;position:relative;overflow:hidden;box-shadow:0 8px 40px rgba(5,150,105,0.35);}
+.act-hero-top{display:flex;align-items:center;gap:16px;margin-bottom:1rem;position:relative;z-index:1;}
+.act-hero h1{font-family:'Baloo 2',cursive;font-size:32px;font-weight:900;color:#fff;text-shadow:0 3px 16px rgba(0,0,0,0.2);}
+.act-hero p{font-size:14px;color:rgba(255,255,255,0.75);}
+
+.act-card{background:rgba(255,255,255,0.97);border-radius:24px;padding:2rem 2.2rem;margin-bottom:1.6rem;box-shadow:0 6px 30px rgba(5,150,105,0.1);border:1.5px solid rgba(187,247,208,0.7);}
+.act-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:linear-gradient(135deg,#059669,#34d399);color:#fff;border-radius:50%;font-size:16px;font-weight:900;margin-right:8px;box-shadow:0 3px 12px rgba(5,150,105,0.35);}
+.act-title{font-family:'Baloo 2',cursive;font-size:20px;font-weight:800;color:#065f46;margin-bottom:1rem;display:flex;align-items:center;}
+.act-title .act-type{font-size:11px;background:#d1fae5;color:#065f46;border-radius:12px;padding:3px 12px;margin-left:auto;font-family:'Quicksand',sans-serif;font-weight:700;letter-spacing:0.5px;}
+.act-instructions{font-size:14px;color:#475569;margin-bottom:1rem;padding:12px 16px;background:#f0fdf4;border-radius:12px;border-left:3px solid var(--green);}
+.act-work-area{background:#f8faff;border:2px dashed #93c5fd;border-radius:14px;padding:1.2rem 1.5rem;min-height:80px;font-size:14px;color:#475569;}
+.fill-blank{display:inline-block;border-bottom:2.5px solid #1a5cb8;min-width:70px;text-align:center;margin:0 4px;font-weight:700;color:var(--blue);}
+.act-columns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:1rem;}
+.act-col{background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:14px;padding:1rem;}
+.act-col h4{font-size:13px;font-weight:800;color:#065f46;margin-bottom:10px;text-align:center;}
+.det-word{display:inline-block;background:#fff;border:1.5px solid #34d399;border-radius:10px;padding:5px 14px;margin:4px;font-size:14px;font-weight:700;color:#065f46;}
+
+/* CORRECTION SECTION */
+.correction-hero{background:linear-gradient(135deg,#7c3aed,#a855f7,#c084fc);border-radius:28px;padding:2rem 2.5rem;margin-bottom:2rem;position:relative;overflow:hidden;box-shadow:0 8px 40px rgba(124,58,237,0.35);}
+.correction-hero-top{display:flex;align-items:center;gap:16px;margin-bottom:0.5rem;position:relative;z-index:1;}
+.correction-hero h1{font-family:'Baloo 2',cursive;font-size:32px;font-weight:900;color:#fff;}
+.correction-hero p{font-size:14px;color:rgba(255,255,255,0.75);}
+
+.corr-card{background:rgba(255,255,255,0.97);border-radius:24px;padding:2rem 2.2rem;margin-bottom:1.4rem;box-shadow:0 6px 30px rgba(124,58,237,0.1);border:1.5px solid rgba(221,214,254,0.8);}
+.corr-act-title{font-family:'Baloo 2',cursive;font-size:18px;font-weight:800;color:#5b21b6;margin-bottom:1rem;padding-bottom:10px;border-bottom:2px solid #ede9fe;display:flex;align-items:center;gap:10px;}
+.corr-item{margin-bottom:12px;padding:14px 18px;background:#faf5ff;border-radius:14px;border-left:4px solid var(--purple);}
+.corr-q{font-size:13px;color:#6b7280;margin-bottom:6px;}
+.corr-a{font-size:15px;font-weight:700;color:#5b21b6;}
+.corr-a .answer{background:#ede9fe;color:#5b21b6;padding:2px 10px;border-radius:8px;margin:0 3px;font-weight:800;}
+.corr-explain{font-size:12px;color:#7c3aed;margin-top:4px;font-style:italic;}
+.corr-star{color:var(--gold);margin-right:4px;}
+
+/* ===== GAMES PAGE ===== */
+.games-hero{background:linear-gradient(135deg,#1e3a6e,#1a5cb8,#f59e0b);border-radius:28px;padding:2rem 2.5rem;margin-bottom:2rem;position:relative;overflow:hidden;box-shadow:0 8px 40px rgba(30,58,110,0.35);}
+.games-hero-top{display:flex;align-items:center;gap:16px;margin-bottom:0.5rem;position:relative;z-index:1;}
+.games-hero h1{font-family:'Baloo 2',cursive;font-size:32px;font-weight:900;color:#fff;}
+.games-hero p{font-size:14px;color:rgba(255,255,255,0.75);}
+
+/* ===== CARD (shared) ===== */
+.card{background:rgba(255,255,255,0.97);border-radius:22px;padding:1.8rem;margin-bottom:1rem;box-shadow:0 6px 30px rgba(30,58,110,0.1);border:1.5px solid rgba(219,234,254,0.8);}
+.scorebar{display:flex;gap:12px;justify-content:center;margin-bottom:1.2rem;flex-wrap:wrap;}
+.stat{background:#f0f5ff;border-radius:14px;padding:10px 22px;text-align:center;border:1.5px solid #dbeafe;}
+.stat .v{font-size:24px;font-weight:900;color:var(--blue);font-family:'Baloo 2',cursive;}
+.stat .l{font-size:11px;color:#94a3b8;font-weight:700;margin-top:1px;}
+.progress{height:10px;background:#e2e8f0;border-radius:5px;margin-bottom:1.2rem;overflow:hidden;}
+.progress-fill{height:100%;border-radius:5px;transition:width 0.5s ease;}
+.pf1{background:linear-gradient(90deg,#1a5cb8,#60a5fa);}
+.pf2{background:linear-gradient(90deg,#7c3aed,#c084fc);}
+.pf3{background:linear-gradient(90deg,#dc2626,#fb923c);}
+.pf4{background:linear-gradient(90deg,#059669,#34d399);}
+.pf5{background:linear-gradient(90deg,#1e3a6e,#3b82f6);}
+
+.badge-pill{display:inline-block;font-size:11px;padding:4px 14px;border-radius:20px;font-weight:800;margin-bottom:10px;animation:bounceIn 0.4s ease-out;letter-spacing:0.3px;}
+.bp-art{background:#dbeafe;color:#1e40af;}
+.bp-pos{background:#fef3c7;color:#92400e;}
+.bp-dem{background:#fce7f3;color:#9d174d;}
+.bp-num{background:#d1fae5;color:#065f46;}
+.bp-ind{background:#ede9fe;color:#5b21b6;}
+
+.question-lbl{font-size:15px;font-weight:700;text-align:center;color:#374151;margin-bottom:8px;}
+.sentence-box{font-size:21px;text-align:center;margin:1rem 0;padding:1.3rem 1.6rem;background:linear-gradient(135deg,#eff6ff,#dbeafe);border-radius:16px;line-height:2;border:2px solid #bfdbfe;animation:fadeUp 0.4s ease-out;}
+.blank{display:inline-block;border-bottom:3px solid var(--blue);min-width:72px;text-align:center;font-weight:900;color:var(--blue);padding:0 8px;transition:all 0.3s;font-family:'Baloo 2',cursive;}
+.options{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:1rem;}
+.opt{padding:12px 28px;font-size:16px;border:2px solid #e2e8f0;border-radius:14px;background:#fff;color:var(--txt);cursor:pointer;transition:all 0.18s;font-family:inherit;font-weight:700;animation:fadeUp 0.4s ease-out both;}
+.opt:nth-child(1){animation-delay:0.05s;}.opt:nth-child(2){animation-delay:0.1s;}.opt:nth-child(3){animation-delay:0.15s;}.opt:nth-child(4){animation-delay:0.2s;}
+.opt:hover:not(:disabled){background:#eff6ff;border-color:var(--blue);transform:translateY(-3px);box-shadow:0 6px 18px rgba(26,92,184,0.18);}
+.opt:active:not(:disabled){transform:scale(0.97);}
+.opt.correct{background:#d1fae5;border-color:#059669;color:#065f46;animation:correctPop 0.5s ease-out;}
+.opt.wrong{background:#fee2e2;border-color:#dc2626;color:#7f1d1d;animation:wrongShake 0.45s ease-out;}
+.opt:disabled{cursor:not-allowed;opacity:0.7;}
+.feedback{text-align:center;font-size:15px;font-weight:700;margin-top:1rem;padding:10px 16px;border-radius:14px;animation:bounceIn 0.5s ease-out;}
+.feedback.ok{color:#065f46;background:#d1fae5;border:1.5px solid #6ee7b7;}
+.feedback.ko{color:#7f1d1d;background:#fee2e2;border:1.5px solid #fca5a5;}
+.next-btn{display:block;margin:1rem auto 0;padding:12px 38px;font-size:15px;border:2px solid var(--blue);border-radius:14px;background:#eff6ff;color:var(--blue);cursor:pointer;font-family:inherit;font-weight:800;transition:all 0.2s;animation:fadeUp 0.4s ease-out;}
+.next-btn:hover{background:var(--blue);color:#fff;transform:translateY(-2px);}
+.end-wrap{text-align:center;padding:2.8rem 1rem;animation:fadeUp 0.6s ease-out;}
+.end-emoji{font-size:78px;margin-bottom:14px;display:block;animation:tada 1s ease-out 0.3s both;}
+.end-title{font-family:'Baloo 2',cursive;font-size:28px;font-weight:900;margin-bottom:8px;}
+.end-score{color:#64748b;font-size:16px;margin-bottom:1.8rem;}
+.replay-btn{padding:14px 40px;font-size:16px;border:2px solid var(--blue);border-radius:16px;background:#fff;color:var(--blue);cursor:pointer;font-weight:900;font-family:inherit;transition:all 0.2s;}
+.replay-btn:hover{background:var(--blue);color:#fff;transform:translateY(-2px);}
+
+/* GAME HEADERS */
+.game-header{border-radius:24px;padding:1.5rem 2rem;margin-bottom:1.4rem;display:flex;align-items:center;gap:16px;position:relative;overflow:hidden;box-shadow:0 6px 28px rgba(0,0,0,0.15);}
+.game-header::before{content:'';position:absolute;right:-30px;top:-30px;width:160px;height:160px;background:rgba(255,255,255,0.08);border-radius:50%;}
+.game-header::after{content:'';position:absolute;right:50px;bottom:-40px;width:110px;height:110px;background:rgba(255,255,255,0.05);border-radius:50%;}
+.gh1{background:linear-gradient(135deg,#1e3a6e,#1a5cb8);}
+.gh2{background:linear-gradient(135deg,#7c3aed,#a855f7);}
+.gh3{background:linear-gradient(135deg,#dc2626,#f97316);}
+.gh4{background:linear-gradient(135deg,#059669,#10b981);}
+.gh5{background:linear-gradient(135deg,#0f172a,#1a5cb8);}
+.gh-icon{font-size:44px;min-width:56px;animation:float 3.5s ease-in-out infinite;position:relative;z-index:1;}
+.gh-title{font-family:'Baloo 2',cursive;font-size:22px;font-weight:900;color:#fff;position:relative;z-index:1;}
+.gh-desc{font-size:13px;color:rgba(255,255,255,0.8);margin-top:3px;position:relative;z-index:1;}
+.gh-restart{margin-left:auto;background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.38);color:#fff;border-radius:22px;padding:8px 20px;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;transition:all 0.2s;white-space:nowrap;position:relative;z-index:1;}
+.gh-restart:hover{background:rgba(255,255,255,0.3);transform:scale(1.06);}
+
+/* GAME 2 (sort) */
+.pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:14px;background:#f0f5ff;border-radius:16px;margin-bottom:1.2rem;min-height:60px;border:2px dashed #93c5fd;}
+.wchip{padding:9px 18px;border-radius:12px;border:2px solid #e2e8f0;background:#fff;color:var(--txt);font-size:15px;cursor:pointer;transition:all 0.18s;font-family:inherit;font-weight:700;}
+.wchip:hover{background:#eff6ff;border-color:var(--blue);transform:scale(1.07) translateY(-2px);}
+.wchip.selected{background:#dbeafe;border-color:var(--blue);color:#1e40af;transform:scale(1.1);box-shadow:0 4px 16px rgba(26,92,184,0.22);}
+.g2cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:1rem;}
+.g2col{border-radius:16px;border:2px solid #e8edf5;background:rgba(255,255,255,0.95);overflow:hidden;transition:all 0.2s;}
+.g2col:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.09);}
+.g2col-head{padding:10px 8px;text-align:center;}
+.g2col-head .nm{font-size:13px;font-weight:800;}
+.g2col-head .ex{font-size:11px;margin-top:2px;opacity:0.8;}
+.ca .g2col-head{background:#dbeafe;}.ca .nm{color:#1e40af;}.ca .ex{color:#1e40af;}
+.cp .g2col-head{background:#fef3c7;}.cp .nm{color:#92400e;}.cp .ex{color:#92400e;}
+.cd .g2col-head{background:#fce7f3;}.cd .nm{color:#9d174d;}.cd .ex{color:#9d174d;}
+.cn .g2col-head{background:#d1fae5;}.cn .nm{color:#065f46;}.cn .ex{color:#065f46;}
+.g2drop{min-height:76px;padding:8px;display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;cursor:pointer;}
+.pchip{padding:6px 13px;border-radius:10px;font-size:13px;font-family:inherit;font-weight:700;cursor:pointer;transition:all 0.2s;animation:bounceIn 0.3s ease-out;}
+.pchip:hover{transform:scale(1.08);}
+.ca .pchip{background:#bfdbfe;color:#1e40af;}
+.cp .pchip{background:#fde68a;color:#92400e;}
+.cd .pchip{background:#fbcfe8;color:#9d174d;}
+.cn .pchip{background:#a7f3d0;color:#065f46;}
+.pchip.wrong{background:#fca5a5!important;color:#7f1d1d!important;text-decoration:line-through;animation:wrongShake 0.4s ease-out;}
+.g2msg{text-align:center;font-size:14px;font-weight:700;min-height:22px;margin-bottom:8px;padding:8px;border-radius:12px;}
+.g2msg.ok{color:#065f46;background:#d1fae5;animation:bounceIn 0.4s ease-out;}
+.g2msg.ko{color:#7f1d1d;background:#fee2e2;animation:wrongShake 0.4s ease-out;}
+.check-btn{display:block;margin:0 auto 0.5rem;padding:12px 36px;font-size:15px;border:2px solid var(--purple);border-radius:14px;background:#faf5ff;color:var(--purple);cursor:pointer;font-family:inherit;font-weight:800;transition:all 0.2s;}
+.check-btn:hover{background:var(--purple);color:#fff;transform:translateY(-2px);}
+.rst-btn{display:none;margin:0.5rem auto;padding:10px 28px;font-size:14px;border:2px solid #e2e8f0;border-radius:14px;background:#fff;color:var(--blue);cursor:pointer;font-weight:700;font-family:inherit;transition:all 0.2s;}
+.rst-btn:hover{background:var(--blue);color:#fff;}
+
+/* CONFETTI */
+.confetti-wrap{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden;}
+.cf{position:absolute;animation:confettiFall 1.3s ease-in forwards;}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .cv-title{font-size:34px;}
+  .cv-btn-row{flex-direction:column;}
+  .lesson-hero h1,.act-hero h1,.correction-hero h1,.games-hero h1{font-size:24px;}
+  .lesson-hero{padding:1.4rem 1.4rem;}
+  .act-columns{grid-template-columns:1fr;}
+  .det-table{font-size:13px;}
+  .g2cols{grid-template-columns:repeat(2,1fr);}
+}
+
+/* FLOATING STICKERS */
+.float-sticker{position:fixed;pointer-events:none;z-index:1;animation:float 4s ease-in-out infinite;}
+.fs1{font-size:28px;top:15%;left:1%;animation-delay:0s;}
+.fs2{font-size:22px;top:55%;left:1.5%;animation-delay:1.5s;}
+.fs3{font-size:26px;top:30%;right:0.5%;animation-delay:0.7s;}
+.fs4{font-size:20px;top:70%;right:1%;animation-delay:2s;}
+</style>
+</head>
+<body>
+
+<div class="confetti-wrap" id="confetti"></div>
+
+<!-- ===== COVER ===== -->
+<div id="cover">
+  <div class="particles-bg" id="particlesBg"></div>
+  <div class="cv-moon">🌙</div>
+  <div class="cv-rocket">🚀</div>
+  <div class="cv-star1">⭐</div>
+  <div class="cv-star2">✨</div>
+  <div class="cv-star3">💫</div>
+  <div class="cv-book">📚</div>
+  <div class="cv-pencil">✏️</div>
+  <div class="cv-planet"></div>
+  <div class="cv-planet2"></div>
+  <div class="cv-logo">📖</div>
+  <div class="cv-school">École Primaire · 4ème Année · Français</div>
+  <div class="cv-box">
+    <div class="cv-tag">Cours de Français</div>
+    <div class="cv-title">Les <span>Déterminants</span></div>
+    <div class="cv-sub">Cours · Activités · Jeux · Corrections</div>
+    <div class="cv-lvl">📚 4ème Année Primaire</div>
+  </div>
+  <div class="cv-info">
+    <div class="cv-ic"><div class="cv-ic-icon">👩‍🏫</div><div><div class="cv-ic-lbl">Enseignants</div><div class="cv-ic-val">Eya Ben Khalifa &amp; Saif Allah Bouchelliga</div></div></div>
+    <div class="cv-ic"><div class="cv-ic-icon">🏫</div><div><div class="cv-ic-lbl">École primaire</div><div class="cv-ic-val">2 Mars — Hmem Zriba</div></div></div>
+  </div>
+  <div class="cv-nav">
+    <button class="cv-btn-main" onclick="showSection('lesson')">📖 Commencer le Cours</button>
+    <div class="cv-btn-row">
+      <button class="cv-btn-sec" onclick="showSection('activities')">✏️ Activités</button>
+      <button class="cv-btn-sec" onclick="showSection('games')">🎮 Jeux</button>
+    </div>
+  </div>
+  <div class="cv-badges">
+    <span class="cv-badge">📖 Cours complet</span>
+    <span class="cv-badge">✏️ Activités</span>
+    <span class="cv-badge">🎯 QCM</span>
+    <span class="cv-badge">⏱️ Chrono</span>
+    <span class="cv-badge">✅ Vrai/Faux</span>
+    <span class="cv-badge">🗂️ Tri</span>
+  </div>
+</div>
+
+<!-- ===== MAIN ===== -->
+<div id="main">
+  <div class="main-bg"></div>
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="float-sticker fs1">📚</div>
+  <div class="float-sticker fs2">✏️</div>
+  <div class="float-sticker fs3">🌟</div>
+  <div class="float-sticker fs4">🎯</div>
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-icon">📖</div>
+      <div>
+        <div class="topbar-title">Les Déterminants</div>
+        <div class="topbar-sub">4ème Année Primaire</div>
+      </div>
+    </div>
+    <button class="back-btn" onclick="goBack()">← Accueil</button>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="showTab('lesson')"><span class="tab-emoji">📖</span>Cours</div>
+    <div class="tab" onclick="showTab('activities')"><span class="tab-emoji">✏️</span>Activités</div>
+    <div class="tab" onclick="showTab('game1')"><span class="tab-emoji">🎯</span>QCM</div>
+    <div class="tab" onclick="showTab('game2')"><span class="tab-emoji">🗂️</span>Tri</div>
+    <div class="tab" onclick="showTab('game3')"><span class="tab-emoji">⏱️</span>Chrono</div>
+    <div class="tab" onclick="showTab('game4')"><span class="tab-emoji">✅</span>Vrai/Faux</div>
+    <div class="tab" onclick="showTab('game5')"><span class="tab-emoji">👥</span>Équipes</div>
+  </div>
+
+  <div class="content">
+
+    <!-- ===== COURS ===== -->
+    <div class="game-panel active" id="panel-lesson">
+      <div class="lesson-hero">
+        <div class="lesson-hero-top">
+          <div class="lesson-hero-icon">📖</div>
+          <div>
+            <h1>Les Déterminants</h1>
+            <p>4ème Année Primaire · Module 4 — "Au rythme des projets"</p>
+          </div>
+        </div>
+        <div class="lesson-objectifs">
+          <span class="obj-chip">🎯 Identifier les déterminants</span>
+          <span class="obj-chip">🎯 Distinguer les types</span>
+          <span class="obj-chip">🎯 Employer correctement</span>
+        </div>
+      </div>
+
+      <!-- OBSERVE -->
+      <div class="lesson-section ls-blue">
+        <div class="section-title"><span class="section-icon">👀</span> J'observe</div>
+        <div class="observe-box">
+          <div class="observe-badge">Texte</div>
+          <p class="observe-text">Dans <strong>un</strong> coin de <strong>la</strong> cour, on a installé <strong>une</strong> cabane pour <strong>le</strong> canard de Magali. <strong>Les</strong> amies de <strong>la</strong> fillette lui apportent de <strong>la</strong> salade ou <strong>des</strong> grains. Ce que <strong>le</strong> canard préfère, c'est suivre <strong>la</strong> fillette pour lui demander <strong>un</strong> morceau de tarte et de <strong>l'</strong>eau.</p>
+        </div>
+        <div class="rule-card rc-blue">
+          <span class="rule-icon">💡</span>
+          <p class="rule-text">Remarque les mots en <strong>gras</strong> : un, la, une, le, les, des, l'... Ils sont placés <strong>avant les noms</strong> et donnent des informations sur ces noms. On les appelle des <span class="highlight">déterminants</span>.</p>
+        </div>
+      </div>
+
+      <!-- JE RETIENS 1 -->
+      <div class="lesson-section ls-gold">
+        <div class="section-title"><span class="section-icon">⭐</span> Je retiens — Le déterminant</div>
+        <div class="retain-box">
+          <div class="retain-badge">Définition</div>
+          <p class="retain-def">Les petits mots placés <strong>avant les noms</strong> s'appellent des <strong>déterminants</strong>. Le déterminant donne des renseignements sur le nom (genre et nombre).</p>
+          <p class="retain-text">📌 En 4ème année, nous apprenons deux types de déterminants :</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:8px;">
+          <span style="background:#dbeafe;color:#1e40af;padding:8px 20px;border-radius:20px;font-weight:800;font-size:14px;">🔵 Les articles (définis &amp; indéfinis)</span>
+          <span style="background:#fef3c7;color:#92400e;padding:8px 20px;border-radius:20px;font-weight:800;font-size:14px;">🟡 Les déterminants possessifs</span>
+        </div>
+      </div>
+
+      <!-- ARTICLES -->
+      <div class="lesson-section ls-blue">
+        <div class="section-title"><span class="section-icon">🔵</span> Les Articles</div>
+
+        <div style="margin-bottom:1.2rem;">
+          <p style="font-size:15px;font-weight:700;color:#374151;margin-bottom:8px;">📌 Articles définis : le, la, l', les</p>
+          <div class="retain-box" style="background:linear-gradient(135deg,#eff6ff,#dbeafe);border-color:#93c5fd;">
+            <div class="retain-badge" style="background:#1a5cb8;">Règle</div>
+            <p class="retain-text">Les articles définis désignent quelque chose de <strong>précis et connu</strong>.</p>
+          </div>
+          <div class="det-table-wrap">
+            <table class="det-table">
+              <thead>
+                <tr>
+                  <th>Genre / Nombre</th>
+                  <th>Article défini</th>
+                  <th>Exemple</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="row-label">Masculin singulier</td><td><span class="det-chip dc-art">le</span></td><td>le chat, le livre</td></tr>
+                <tr><td class="row-label">Féminin singulier</td><td><span class="det-chip dc-art">la</span></td><td>la fleur, la maison</td></tr>
+                <tr><td class="row-label">Devant voyelle ou h</td><td><span class="det-chip dc-art">l'</span></td><td>l'école, l'arbre</td></tr>
+                <tr><td class="row-label">Pluriel (masc. et fém.)</td><td><span class="det-chip dc-art">les</span></td><td>les enfants, les fleurs</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <p style="font-size:15px;font-weight:700;color:#374151;margin-bottom:8px;">📌 Articles indéfinis : un, une, des</p>
+          <div class="retain-box" style="background:linear-gradient(135deg,#eff6ff,#dbeafe);border-color:#93c5fd;">
+            <div class="retain-badge" style="background:#1a5cb8;">Règle</div>
+            <p class="retain-text">Les articles indéfinis désignent quelque chose de <strong>non précisé</strong>.</p>
+          </div>
+          <div class="det-table-wrap">
+            <table class="det-table">
+              <thead>
+                <tr>
+                  <th>Genre / Nombre</th>
+                  <th>Article indéfini</th>
+                  <th>Exemple</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="row-label">Masculin singulier</td><td><span class="det-chip dc-art">un</span></td><td>un chien, un stylo</td></tr>
+                <tr><td class="row-label">Féminin singulier</td><td><span class="det-chip dc-art">une</span></td><td>une pomme, une fille</td></tr>
+                <tr><td class="row-label">Pluriel (masc. et fém.)</td><td><span class="det-chip dc-art">des</span></td><td>des livres, des amies</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="examples-grid" style="margin-top:1.2rem;">
+          <div class="ex-card">
+            <div class="ex-det">Le</div>
+            <div class="ex-phrase"><em>le</em> petit Max élève un chiot.</div>
+            <div class="ex-label">Masculin singulier</div>
+          </div>
+          <div class="ex-card">
+            <div class="ex-det">La</div>
+            <div class="ex-phrase"><em>la</em> famille de Max part en vacances.</div>
+            <div class="ex-label">Féminin singulier</div>
+          </div>
+          <div class="ex-card">
+            <div class="ex-det">Une</div>
+            <div class="ex-phrase"><em>une</em> voisine garde le chiot.</div>
+            <div class="ex-label">Indéfini féminin</div>
+          </div>
+          <div class="ex-card">
+            <div class="ex-det">Les</div>
+            <div class="ex-phrase"><em>les</em> amies de Magali.</div>
+            <div class="ex-label">Pluriel</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DETERMINANTS POSSESSIFS -->
+      <div class="lesson-section ls-gold">
+        <div class="section-title"><span class="section-icon">🟡</span> Les Déterminants Possessifs</div>
+        <div class="observe-box" style="background:linear-gradient(135deg,#fffbeb,#fef3c7);border-color:#fde68a;">
+          <div class="observe-badge" style="background:#f59e0b;color:#78350f;">Texte d'observation</div>
+          <p class="observe-text">Ce matin, Valentine est malade. Elle tousse. <strong>Son</strong> front est brûlant et <strong>ses</strong> joues sont rouges. <strong>Sa</strong> mère appelle le médecin. «Bonjour, <strong>ma</strong> jolie, dit le docteur. — Bonjour, docteur. — Tu as bonne mine, je peux écouter les battements de <strong>ton</strong> cœur ?»</p>
+        </div>
+        <div class="retain-box">
+          <div class="retain-badge">Règle</div>
+          <p class="retain-def">Quand je parle de ce qui <strong>appartient</strong> à une personne ou à un animal, j'utilise des <strong>déterminants possessifs</strong>.</p>
+        </div>
+        <div class="det-table-wrap">
+          <table class="det-table">
+            <thead>
+              <tr>
+                <th>Personne</th>
+                <th>Masculin singulier</th>
+                <th>Féminin singulier</th>
+                <th>Pluriel</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="row-label">À moi (je)</td><td><span class="det-chip dc-pos">mon</span></td><td><span class="det-chip dc-pos">ma</span></td><td><span class="det-chip dc-pos">mes</span></td></tr>
+              <tr><td class="row-label">À toi (tu)</td><td><span class="det-chip dc-pos">ton</span></td><td><span class="det-chip dc-pos">ta</span></td><td><span class="det-chip dc-pos">tes</span></td></tr>
+              <tr><td class="row-label">À lui/elle (il/elle)</td><td><span class="det-chip dc-pos">son</span></td><td><span class="det-chip dc-pos">sa</span></td><td><span class="det-chip dc-pos">ses</span></td></tr>
+              <tr><td class="row-label">À nous (nous)</td><td colspan="2"><span class="det-chip dc-pos">notre</span></td><td><span class="det-chip dc-pos">nos</span></td></tr>
+              <tr><td class="row-label">À vous (vous)</td><td colspan="2"><span class="det-chip dc-pos">votre</span></td><td><span class="det-chip dc-pos">vos</span></td></tr>
+              <tr><td class="row-label">À eux/elles</td><td colspan="2"><span class="det-chip dc-pos">leur</span></td><td><span class="det-chip dc-pos">leurs</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="examples-grid" style="margin-top:1.2rem;">
+          <div class="ex-card" style="border-color:#fde68a;">
+            <div class="ex-det" style="color:#92400e;">Mon / Ma / Mes</div>
+            <div class="ex-phrase">Je bois <em>ma</em> tisane. Je bois <em>mon</em> sirop. J'aime <em>mes</em> parents.</div>
+            <div class="ex-label">1ère personne</div>
+          </div>
+          <div class="ex-card" style="border-color:#fde68a;">
+            <div class="ex-det" style="color:#92400e;">Son / Sa / Ses</div>
+            <div class="ex-phrase"><em>Son</em> front est brûlant. <em>Sa</em> mère appelle. <em>Ses</em> joues sont rouges.</div>
+            <div class="ex-label">3ème personne</div>
+          </div>
+          <div class="ex-card" style="border-color:#fde68a;">
+            <div class="ex-det" style="color:#92400e;">Notre / Nos</div>
+            <div class="ex-phrase">Nous soignons <em>notre</em> chat. Nous arrosons <em>nos</em> plantes.</div>
+            <div class="ex-label">Nous</div>
+          </div>
+          <div class="ex-card" style="border-color:#fde68a;">
+            <div class="ex-det" style="color:#92400e;">Leur / Leurs</div>
+            <div class="ex-phrase">Ils arrosent <em>leurs</em> fleurs. C'est <em>leur</em> maison.</div>
+            <div class="ex-label">Eux / Elles</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ATTENTION BOX -->
+      <div class="lesson-section ls-green">
+        <div class="section-title"><span class="section-icon">⚠️</span> Attention !</div>
+        <div class="rule-card rc-green">
+          <span class="rule-icon">🔵</span>
+          <div class="rule-text">
+            <strong>Le déterminant s'accorde avec le nom qu'il accompagne.</strong><br>
+            Exemple : <span class="highlight">un</span> écureuil (masc. sing.) · <span class="highlight">la</span> maîtresse (fém. sing.) · <span class="highlight">les</span> bébés (pluriel)
+          </div>
+        </div>
+        <div class="rule-card rc-gold">
+          <span class="rule-icon">⚡</span>
+          <div class="rule-text">
+            <strong>Attention : mon / ton / son</strong> s'utilisent devant un nom féminin commençant par une <strong>voyelle</strong>.<br>
+            Exemple : <span class="highlight">mon</span> amie (et non ma amie) · <span class="highlight">ton</span> école · <span class="highlight">son</span> histoire
+          </div>
+        </div>
+        <div class="rule-card rc-blue">
+          <span class="rule-icon">📝</span>
+          <div class="rule-text">
+            <strong>l'</strong> (élision) s'utilise devant un nom commençant par une voyelle ou un <em>h</em> muet.<br>
+            Exemple : <span class="highlight">l'</span>école · <span class="highlight">l'</span>arbre · <span class="highlight">l'</span>heure
+          </div>
+        </div>
+      </div>
+
+      <!-- RESUME -->
+      <div class="lesson-section ls-purple">
+        <div class="section-title"><span class="section-icon">📋</span> Résumé — Ce que j'ai appris</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;">
+          <div style="background:#dbeafe;border-radius:16px;padding:16px;border:2px solid #93c5fd;">
+            <div style="font-size:18px;margin-bottom:6px;">🔵 Articles définis</div>
+            <div style="font-size:22px;font-weight:900;color:#1e40af;font-family:'Baloo 2',cursive;">le · la · l' · les</div>
+            <div style="font-size:12px;color:#1e40af;margin-top:4px;">Quelque chose de précis</div>
+          </div>
+          <div style="background:#dbeafe;border-radius:16px;padding:16px;border:2px solid #93c5fd;">
+            <div style="font-size:18px;margin-bottom:6px;">🔵 Articles indéfinis</div>
+            <div style="font-size:22px;font-weight:900;color:#1e40af;font-family:'Baloo 2',cursive;">un · une · des</div>
+            <div style="font-size:12px;color:#1e40af;margin-top:4px;">Quelque chose de non précisé</div>
+          </div>
+          <div style="background:#fef3c7;border-radius:16px;padding:16px;border:2px solid #fde68a;">
+            <div style="font-size:18px;margin-bottom:6px;">🟡 Possessifs (1ère)</div>
+            <div style="font-size:20px;font-weight:900;color:#92400e;font-family:'Baloo 2',cursive;">mon · ma · mes</div>
+            <div style="font-size:12px;color:#92400e;margin-top:4px;">Ce qui appartient à moi</div>
+          </div>
+          <div style="background:#fef3c7;border-radius:16px;padding:16px;border:2px solid #fde68a;">
+            <div style="font-size:18px;margin-bottom:6px;">🟡 Possessifs (2ème)</div>
+            <div style="font-size:20px;font-weight:900;color:#92400e;font-family:'Baloo 2',cursive;">ton · ta · tes</div>
+            <div style="font-size:12px;color:#92400e;margin-top:4px;">Ce qui appartient à toi</div>
+          </div>
+          <div style="background:#fef3c7;border-radius:16px;padding:16px;border:2px solid #fde68a;">
+            <div style="font-size:18px;margin-bottom:6px;">🟡 Possessifs (3ème)</div>
+            <div style="font-size:20px;font-weight:900;color:#92400e;font-family:'Baloo 2',cursive;">son · sa · ses</div>
+            <div style="font-size:12px;color:#92400e;margin-top:4px;">Ce qui appartient à lui/elle</div>
+          </div>
+          <div style="background:#fef3c7;border-radius:16px;padding:16px;border:2px solid #fde68a;">
+            <div style="font-size:18px;margin-bottom:6px;">🟡 Possessifs (nous/vous/eux)</div>
+            <div style="font-size:18px;font-weight:900;color:#92400e;font-family:'Baloo 2',cursive;">notre/nos · votre/vos · leur/leurs</div>
+            <div style="font-size:12px;color:#92400e;margin-top:4px;">Pluriel de politesse</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== ACTIVITÉS ===== -->
+    <div class="game-panel" id="panel-activities">
+      <div class="act-hero">
+        <div class="act-hero-top">
+          <div class="lesson-hero-icon">✏️</div>
+          <div>
+            <h1>Activités</h1>
+            <p>Exercices du Cahier d'Activités — 4ème Année</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activité 1 -->
+      <div class="act-card">
+        <div class="act-title">
+          <span class="act-num">1</span> Classe les mots dans le tableau
+          <span class="act-type">📋 Tableau</span>
+        </div>
+        <div class="act-instructions">
+          Lis les mots suivants et classe-les dans le tableau selon le genre du nom.
+        </div>
+        <div class="act-work-area">
+          <p style="font-size:15px;font-weight:700;margin-bottom:14px;color:#374151;">Mots : <em>un écureuil · le pied · la copine · des garçons · une chatte · un copain · la forêt · une fille</em></p>
+          <div class="act-columns">
+            <div class="act-col">
+              <h4>🔵 Nom masculin</h4>
+              <div style="min-height:60px;"></div>
+            </div>
+            <div class="act-col">
+              <h4>🔴 Nom féminin</h4>
+              <div style="min-height:60px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activité 2 -->
+      <div class="act-card">
+        <div class="act-title">
+          <span class="act-num">2</span> Complète le tableau (singulier / pluriel)
+          <span class="act-type">📋 Tableau</span>
+        </div>
+        <div class="act-instructions">
+          Complète le tableau en écrivant les noms au singulier ou au pluriel avec le bon déterminant.
+        </div>
+        <div class="act-work-area">
+          <div class="det-table-wrap">
+            <table class="det-table">
+              <thead>
+                <tr><th>Noms au singulier</th><th>Noms au pluriel</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>une amie</td><td style="color:#94a3b8;font-style:italic;">.................................</td></tr>
+                <tr><td>la maîtresse</td><td style="color:#94a3b8;font-style:italic;">.................................</td></tr>
+                <tr><td style="color:#94a3b8;font-style:italic;">.................................</td><td>des voisins</td></tr>
+                <tr><td style="color:#94a3b8;font-style:italic;">.................................</td><td>les bébés</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activité 3 -->
+      <div class="act-card">
+        <div class="act-title">
+          <span class="act-num">3</span> Barre ce qui est faux
+          <span class="act-type">✏️ Choix</span>
+        </div>
+        <div class="act-instructions">
+          Lis le texte et barre le déterminant qui ne convient pas (entoure le bon).
+        </div>
+        <div class="act-work-area">
+          <p style="font-size:15px;line-height:2;">(<span class="fill-blank">le / la</span>) fils de madame Martin a (<span class="fill-blank">la / le</span>) grippe. Sa mère sort de (<span class="fill-blank">le / la</span>) maison pour aller à (<span class="fill-blank">le / la</span>) pharmacie. Dans (<span class="fill-blank">le / la</span>) rue, elle voit (<span class="fill-blank">une / un</span>) petite fille qui aide (<span class="fill-blank">une / un</span>) vieille dame à traverser la chaussée.</p>
+        </div>
+      </div>
+
+      <!-- Activité 4 -->
+      <div class="act-card">
+        <div class="act-title">
+          <span class="act-num">4</span> Relie par une flèche (déterminants possessifs)
+          <span class="act-type">🔗 Relier</span>
+        </div>
+        <div class="act-instructions">
+          Relie chaque déterminant possessif au nom qui lui correspond (activité du Module 5 — Cahier d'activités, page 49).
+        </div>
+        <div class="act-work-area">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+            <div>
+              <p style="text-align:center;font-weight:800;color:#374151;margin-bottom:10px;">Groupe 1</p>
+              <div style="text-align:center;">
+                <div class="det-word">ma</div> ↔ savon<br>
+                <div class="det-word">ton</div> ↔ cheveux<br>
+                <div class="det-word">ses</div> ↔ serviette<br>
+              </div>
+            </div>
+            <div>
+              <p style="text-align:center;font-weight:800;color:#374151;margin-bottom:10px;">Groupe 2</p>
+              <div style="text-align:center;">
+                <div class="det-word">mon</div> ↔ serviette<br>
+                <div class="det-word">tes</div> ↔ savon<br>
+                <div class="det-word">sa</div> ↔ cheveux<br>
+              </div>
+            </div>
+            <div>
+              <p style="text-align:center;font-weight:800;color:#374151;margin-bottom:10px;">Groupe 3</p>
+              <div style="text-align:center;">
+                <div class="det-word">mes</div> ↔ savon<br>
+                <div class="det-word">ta</div> ↔ serviette<br>
+                <div class="det-word">son</div> ↔ cheveux<br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activité 5 -->
+      <div class="act-card">
+        <div class="act-title">
+          <span class="act-num">5</span> Complète avec sa, son ou ses
+          <span class="act-type">✏️ Compléter</span>
+        </div>
+        <div class="act-instructions">
+          Complète les phrases avec le bon déterminant possessif : <strong>sa</strong>, <strong>son</strong> ou <strong>ses</strong>.
+        </div>
+        <div class="act-work-area">
+          <p style="font-size:15px;line-height:2.2;">Le médecin examine la fillette : il prend <span class="fill-blank">........</span> température. Il écoute les battements de <span class="fill-blank">........</span> cœur. Il examine <span class="fill-blank">........</span> yeux et le fond de <span class="fill-blank">........</span> gorge. Ensuite, il donne des conseils à <span class="fill-blank">........</span> petite malade et à <span class="fill-blank">........</span> mère.</p>
+        </div>
+      </div>
+
+      <!-- Activité 6 - Révision -->
+      <div class="act-card">
+        <div class="act-title">
+          <span class="act-num">6</span> Révision — Barre le déterminant incorrect
+          <span class="act-type">✏️ Révision</span>
+        </div>
+        <div class="act-instructions">
+          Lis le texte et barre le déterminant qui ne convient pas.
+        </div>
+        <div class="act-work-area">
+          <p style="font-size:15px;line-height:2.2;">Le chat veut aider (<span class="fill-blank">son / sa</span>) maître. Il prend (<span class="fill-blank">son / ses</span>) sac, met (<span class="fill-blank">sa / ses</span>) bottes et s'en va à la forêt pour chasser (<span class="fill-blank">des / un</span>) lapins.</p>
+        </div>
+      </div>
+
+      <!-- Activité 7 -->
+      <div class="act-card">
+        <div class="act-title">
+          <span class="act-num">7</span> Complète avec les déterminants du cadre
+          <span class="act-type">✏️ Compléter</span>
+        </div>
+        <div class="act-instructions">
+          Complète le texte avec les déterminants suivants : <strong>ma · ta · une · une</strong>
+        </div>
+        <div class="act-work-area">
+          <p style="font-size:15px;line-height:2.2;">Cendrillon est en train de pleurer. Tout à coup, <span class="fill-blank">......</span> fée apparaît. Elle la console et lui dit : « Ne pleure pas. Avec <span class="fill-blank">......</span> baguette, <span class="fill-blank">......</span> robe déchirée se changera en <span class="fill-blank">......</span> belle robe brodée d'or et d'argent. »</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===== GAME 5 — ÉQUIPES ===== -->
+    <div class="game-panel" id="panel-game5">
+      <div class="game-header gh5"><div class="gh-icon">👥</div><div><div class="gh-title">Jeu 5 — Équipes A &amp; B</div><div class="gh-desc">Tour par tour — Qui gagne ?</div></div><button class="gh-restart" onclick="g5restart()">↺ Recommencer</button></div>
+      <div id="g5-app"></div>
+    </div>
+
+    <!-- ===== GAME 1 - QCM ===== -->
+    <div class="game-panel" id="panel-game1">
+      <div class="game-header gh1"><div class="gh-icon">🎯</div><div><div class="gh-title">Jeu 1 — QCM</div><div class="gh-desc">Choisis le bon déterminant</div></div><button class="gh-restart" onclick="g1restart()">↺ Recommencer</button></div>
+      <div id="g1-app"></div>
+    </div>
+
+    <!-- ===== GAME 2 - TRI ===== -->
+    <div class="game-panel" id="panel-game2">
+      <div class="game-header gh2"><div class="gh-icon">🗂️</div><div><div class="gh-title">Jeu 2 — Trie les déterminants</div><div class="gh-desc">Clique sur un mot puis sur la bonne colonne</div></div><button class="gh-restart" onclick="g2Init()">↺ Recommencer</button></div>
+      <div class="card">
+        <div style="display:flex;gap:12px;justify-content:center;margin-bottom:1rem;">
+          <div class="stat"><div class="v" id="g2sc">0</div><div class="l">⭐ Points</div></div>
+          <div class="stat"><div class="v" id="g2rem">12</div><div class="l">Restants</div></div>
+        </div>
+        <div class="pool" id="g2pool"></div>
+        <div class="g2cols">
+          <div class="g2col ca" onclick="g2Drop('art')"><div class="g2col-head"><div class="nm">🔵 Articles</div><div class="ex">le, la, un, des...</div></div><div class="g2drop" id="drop-art"></div></div>
+          <div class="g2col cp" onclick="g2Drop('pos')"><div class="g2col-head"><div class="nm">🟡 Possessifs</div><div class="ex">mon, ta, ses...</div></div><div class="g2drop" id="drop-pos"></div></div>
+        </div>
+        <div class="g2msg" id="g2msg"></div>
+        <button class="check-btn" id="g2chk" onclick="g2Check()">✅ Vérifier</button>
+        <button class="rst-btn" id="g2rst" onclick="g2Init()">↺ Recommencer</button>
+      </div>
+    </div>
+
+    <!-- ===== GAME 3 - CHRONO ===== -->
+    <div class="game-panel" id="panel-game3">
+      <div class="game-header gh3"><div class="gh-icon">⏱️</div><div><div class="gh-title">Jeu 3 — Chrono</div><div class="gh-desc">Réponds avant la fin du temps !</div></div><button class="gh-restart" onclick="g3restart()">↺ Recommencer</button></div>
+      <div id="g3-app"></div>
+    </div>
+
+    <!-- ===== GAME 4 - VRAI/FAUX ===== -->
+    <div class="game-panel" id="panel-game4">
+      <div class="game-header gh4"><div class="gh-icon">✅</div><div><div class="gh-title">Jeu 4 — Vrai ou Faux ?</div><div class="gh-desc">Le déterminant est-il correct ?</div></div><button class="gh-restart" onclick="g4restart()">↺ Recommencer</button></div>
+      <div id="g4-app"></div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<script>
+// ===== PARTICLES =====
+(function(){
+  const bg=document.getElementById('particlesBg');
+  if(!bg)return;
+  for(let i=0;i<80;i++){
+    const d=document.createElement('div');
+    d.className='p-dot';
+    const sz=1+Math.random()*3;
+    d.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;background:rgba(255,255,255,${0.3+Math.random()*0.6});animation-delay:${Math.random()*4}s;animation-duration:${2+Math.random()*3}s;`;
+    bg.appendChild(d);
+  }
+})();
+
+// ===== AUDIO =====
+let _actx=null;
+function getCtx(){if(!_actx){try{_actx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}return _actx;}
+function playTone(freq,t,d,type='sine',vol=0.2){
+  try{const ctx=getCtx();if(!ctx)return;
+    const o=ctx.createOscillator(),g=ctx.createGain();
+    o.connect(g);g.connect(ctx.destination);
+    o.type=type;o.frequency.value=freq;
+    g.gain.setValueAtTime(vol,ctx.currentTime+t);
+    g.gain.linearRampToValueAtTime(0,ctx.currentTime+t+d);
+    o.start(ctx.currentTime+t);o.stop(ctx.currentTime+t+d+0.05);
+  }catch(e){}
+}
+function playCorrect(){[[523,0,0.12],[659,0.1,0.15],[784,0.22,0.2]].forEach(([f,t,d])=>playTone(f,t,d));}
+function playWrong(){[[250,0,0.15],[220,0.15,0.2],[180,0.35,0.25]].forEach(([f,t,d])=>playTone(f,t,d,'sawtooth'));}
+function playStart(){[[523,0,0.1],[659,0.1,0.1],[784,0.2,0.1],[1047,0.3,0.3]].forEach(([f,t,d])=>playTone(f,t,d));}
+function playWin(){[[523,0],[659,0.1],[784,0.2],[880,0.3],[1047,0.45],[1319,0.6]].forEach(([f,t])=>playTone(f,t,0.18));}
+function playClick(){playTone(880,0,0.07,'sine',0.12);}
+
+// ===== UTILS =====
+function shuf(a){return[...a].sort(()=>Math.random()-0.5);}
+
+// ===== NAVIGATION =====
+let currentTab='lesson';
+function goBack(){document.getElementById('main').style.display='none';document.getElementById('cover').style.display='flex';}
+function showSection(sec){
+  document.getElementById('cover').style.display='none';
+  document.getElementById('main').style.display='block';
+  showTab(sec);
+  playStart();
+  g3render();g4render();
+}
+function showTab(name){
+  playClick();
+  currentTab=name;
+  const panels=['lesson','activities','game1','game2','game3','game4','game5'];
+  panels.forEach(p=>{
+    const el=document.getElementById('panel-'+p);
+    if(el)el.classList.toggle('active',p===name);
+  });
+  const tabs=document.querySelectorAll('.tab');
+  const tabNames=['lesson','activities','game1','game2','game3','game4','game5'];
+  tabs.forEach((t,i)=>t.classList.toggle('active',tabNames[i]===name));
+}
+
+// ===== CONFETTI =====
+function launchConfetti(){
+  const wrap=document.getElementById('confetti');
+  wrap.innerHTML='';
+  const colors=['#f59e0b','#fde68a','#1a5cb8','#059669','#dc2626','#a855f7','#10b981','#f97316'];
+  for(let i=0;i<65;i++){
+    const cf=document.createElement('div');
+    cf.className='cf';
+    const sz=6+Math.random()*10;
+    cf.style.cssText=`left:${Math.random()*100}%;top:-20px;width:${sz}px;height:${sz}px;background:${colors[Math.floor(Math.random()*colors.length)]};border-radius:${Math.random()>0.5?'50%':'3px'};animation-delay:${Math.random()*0.7}s;animation-duration:${0.9+Math.random()*0.8}s;`;
+    wrap.appendChild(cf);
+  }
+  setTimeout(()=>wrap.innerHTML='',2400);
+}
+
+// ===== JEU 1 — QCM =====
+const q1=[
+  {b:'bp-art',l:'Article défini',s:'___ chat est gris.',a:'Le',o:['Le','La','Les','Un'],e:'chat = masculin singulier → Le'},
+  {b:'bp-art',l:'Article défini',s:'___ fleur est belle.',a:'La',o:['Le','La','Les','Des'],e:'fleur = féminin singulier → La'},
+  {b:'bp-art',l:'Article défini',s:'___ enfants jouent.',a:'Les',o:['Le','La','Les','Un'],e:'enfants = pluriel → Les'},
+  {b:'bp-art',l:'Article indéfini',s:"J'ai ___ chien.",a:'un',o:['un','une','des','le'],e:'chien = masculin singulier → un'},
+  {b:'bp-art',l:'Article indéfini',s:'Voici ___ pomme.',a:'une',o:['un','une','des','la'],e:'pomme = féminin singulier → une'},
+  {b:'bp-art',l:'Article indéfini',s:'Il mange ___ fruits.',a:'des',o:['un','une','des','les'],e:'fruits = pluriel → des'},
+  {b:'bp-pos',l:'Déterminant possessif',s:"C'est ___ livre. (à moi)",a:'mon',o:['mon','ma','mes','son'],e:'livre = masculin singulier, à moi → mon'},
+  {b:'bp-pos',l:'Déterminant possessif',s:'Je cherche ___ trousse.',a:'ma',o:['mon','ma','mes','ta'],e:'trousse = féminin singulier, à moi → ma'},
+  {b:'bp-pos',l:'Déterminant possessif',s:'Range ___ affaires !',a:'tes',o:['ton','ta','tes','ses'],e:'affaires = pluriel, à toi → tes'},
+  {b:'bp-pos',l:'Déterminant possessif',s:'___ mère est arrivée.',a:'Sa',o:['Son','Sa','Ses','Ma'],e:'mère = féminin singulier, à elle → Sa'},
+  {b:'bp-art',l:'Article défini',s:"___ école est grande.",a:"L'",o:["L'",'Le','La','Les'],e:'école commence par une voyelle → L\''},
+  {b:'bp-pos',l:'Déterminant possessif',s:'Nous arrosons ___ plantes.',a:'nos',o:['notre','nos','vos','leurs'],e:'plantes = pluriel, à nous → nos'},
+  {b:'bp-pos',l:'Déterminant possessif',s:'___ maison est belle. (à nous)',a:'Notre',o:['Nos','Notre','Votre','Leur'],e:'maison = féminin singulier, à nous → Notre'},
+  {b:'bp-art',l:'Article indéfini',s:'Elle élève ___ chiot.',a:'un',o:['un','une','des','le'],e:'chiot = masculin singulier → un'},
+  {b:'bp-pos',l:'Déterminant possessif',s:'___ front est brûlant. (à elle)',a:'Son',o:['Son','Sa','Ses','Mon'],e:'front = masculin singulier, à elle → Son'},
+];
+let g1c=0,g1s=0,g1a=false;
+function g1render(){
+  const app=document.getElementById('g1-app');
+  if(g1c>=q1.length){g1end(app);return;}
+  const q=q1[g1c];
+  const pct=Math.round((g1c/q1.length)*100);
+  app.innerHTML=`
+    <div class="scorebar">
+      <div class="stat"><div class="v">${g1s}</div><div class="l">⭐ Points</div></div>
+      <div class="stat"><div class="v">${g1c+1}/${q1.length}</div><div class="l">Question</div></div>
+    </div>
+    <div class="progress"><div class="progress-fill pf1" style="width:${pct}%"></div></div>
+    <div class="card">
+      <div style="text-align:center;margin-bottom:10px;"><span class="badge-pill ${q.b}">${q.l}</span></div>
+      <div class="question-lbl">Choisis le bon déterminant :</div>
+      <div class="sentence-box">${q.s.replace('___','<span class="blank" id="g1bl">___</span>')}</div>
+      <div class="options">${shuf(q.o).map(o=>`<button class="opt" onclick="g1ch('${o}')">${o}</button>`).join('')}</div>
+      <div class="feedback" id="g1fb" style="display:none"></div>
+      <button class="next-btn" id="g1nx" style="display:none" onclick="g1next()">Question suivante →</button>
+    </div>`;
+}
+function g1ch(opt){
+  if(g1a)return;g1a=true;
+  const q=q1[g1c];const ok=opt===q.a;
+  if(ok){g1s++;playCorrect();launchConfetti();}else{playWrong();}
+  document.getElementById('g1bl').textContent=q.a;
+  document.getElementById('g1bl').style.color=ok?'#059669':'#dc2626';
+  document.querySelectorAll('#g1-app .opt').forEach(b=>{
+    b.disabled=true;
+    if(b.textContent===q.a)b.classList.add('correct');
+    else if(b.textContent===opt&&!ok)b.classList.add('wrong');
+  });
+  const fb=document.getElementById('g1fb');fb.style.display='block';
+  fb.className='feedback '+(ok?'ok':'ko');
+  fb.textContent=(ok?'🎉 Bravo ! ':'😅 ')+q.e;
+  document.getElementById('g1nx').style.display='block';
+}
+function g1next(){g1c++;g1a=false;g1render();}
+function g1end(app){
+  const pct=Math.round((g1s/q1.length)*100);
+  const e=pct>=80?'🏆':pct>=60?'🌟':'💪';
+  const m=pct>=80?'Excellent travail !':pct>=60?'Bien joué !':'Continue à t\'entraîner !';
+  if(pct>=60){playWin();launchConfetti();}else{playWrong();}
+  app.innerHTML=`<div class="card end-wrap"><span class="end-emoji">${e}</span><div class="end-title">${m}</div><div class="end-score">Score : <strong>${g1s} / ${q1.length}</strong> (${pct}%)</div><button class="replay-btn" onclick="g1restart()">↺ Rejouer</button></div>`;
+}
+function g1restart(){g1c=0;g1s=0;g1a=false;g1render();}
+g1render();
+
+// ===== JEU 2 — TRI (Articles vs Possessifs) =====
+const g2w=[
+  {w:'le',c:'art'},{w:'la',c:'art'},{w:'les',c:'art'},{w:'un',c:'art'},{w:'une',c:'art'},{w:'des',c:'art'},{w:"l'",c:'art'},
+  {w:'mon',c:'pos'},{w:'ta',c:'pos'},{w:'ses',c:'pos'},{w:'notre',c:'pos'},{w:'leurs',c:'pos'},
+];
+let g2sel=null,g2pl={},g2s2=0,g2ck=false;
+function g2Init(){
+  g2sel=null;g2pl={};g2s2=0;g2ck=false;
+  document.getElementById('g2sc').textContent=0;
+  document.getElementById('g2rem').textContent=g2w.length;
+  document.getElementById('g2msg').textContent='';
+  document.getElementById('g2msg').className='g2msg';
+  document.getElementById('g2chk').style.display='block';
+  document.getElementById('g2rst').style.display='none';
+  g2rPool();g2rDrops();
+}
+function g2rPool(){
+  const pool=document.getElementById('g2pool');pool.innerHTML='';
+  shuf(g2w).forEach(item=>{
+    if(g2pl[item.w])return;
+    const c=document.createElement('button');
+    c.className='wchip'+(g2sel===item.w?' selected':'');
+    c.textContent=item.w;c.onclick=()=>{playClick();g2sel2(item.w);};
+    pool.appendChild(c);
+  });
+}
+function g2rDrops(){
+  ['art','pos'].forEach(cat=>{
+    const z=document.getElementById('drop-'+cat);z.innerHTML='';
+    Object.entries(g2pl).forEach(([w,c])=>{
+      if(c!==cat)return;
+      const ch=document.createElement('span');
+      ch.className='pchip';ch.textContent=w;
+      if(g2ck){const cor=g2w.find(x=>x.w===w).c;if(cor!==cat)ch.classList.add('wrong');}
+      ch.onclick=()=>{if(!g2ck){delete g2pl[w];g2rPool();g2rDrops();g2uRem();}};
+      z.appendChild(ch);
+    });
+  });
+}
+function g2sel2(w){g2sel=(g2sel===w)?null:w;g2rPool();}
+function g2Drop(cat){if(!g2sel||g2ck)return;playClick();g2pl[g2sel]=cat;g2sel=null;g2uRem();g2rPool();g2rDrops();}
+function g2uRem(){document.getElementById('g2rem').textContent=g2w.length-Object.keys(g2pl).length;}
+function g2Check(){
+  if(Object.keys(g2pl).length===0){document.getElementById('g2msg').textContent='Place au moins un mot !';document.getElementById('g2msg').className='g2msg ko';playWrong();return;}
+  g2ck=true;g2s2=0;
+  Object.entries(g2pl).forEach(([w,cat])=>{const cor=g2w.find(x=>x.w===w).c;if(cor===cat)g2s2++;});
+  document.getElementById('g2sc').textContent=g2s2;
+  const msg=document.getElementById('g2msg');
+  if(g2s2===g2w.length){msg.textContent='🎉 Parfait ! '+g2s2+'/'+g2w.length+' — Excellent !';msg.className='g2msg ok';playWin();launchConfetti();}
+  else{msg.textContent='😅 '+g2s2+'/'+Object.keys(g2pl).length+' corrects — Les mots barrés sont incorrects.';msg.className='g2msg ko';playWrong();}
+  g2rDrops();
+  document.getElementById('g2chk').style.display='none';
+  document.getElementById('g2rst').style.display='block';
+}
+g2Init();
+
+// ===== JEU 3 — CHRONO =====
+const q3=[
+  {s:'___ soleil brille.',a:'Le',o:['Le','La','Les','Un']},
+  {s:'___ filles chantent.',a:'Les',o:['Le','La','Les','Des']},
+  {s:"C'est ___ stylo.",a:'un',o:['un','une','des','le']},
+  {s:'___ maison est grande.',a:'La',o:['Le','La','Les','Une']},
+  {s:'Range ___ livre ! (à toi)',a:'ton',o:['mon','ton','son','mes']},
+  {s:'Il a ___ amis.',a:'des',o:['un','une','des','les']},
+  {s:"___ école est grande.",a:"L'",o:["L'",'Le','La','Les']},
+  {s:'Je lis ___ histoire.',a:'une',o:['un','une','des','cette']},
+  {s:'Nous arrosons ___ plantes.',a:'nos',o:['notre','nos','vos','leurs']},
+  {s:'Elle cherche ___ trousse. (à elle)',a:'sa',o:['mon','ta','sa','ses']},
+  {s:'___ front est brûlant. (à elle)',a:'Son',o:['Son','Sa','Ses','Mon']},
+  {s:'Nous aimons ___ animaux.',a:'les',o:['le','la','les','des']},
+];
+const G3MAX=15;
+let g3c=0,g3s=0,g3ti=null,g3t=0,g3a=false;
+function g3render(){
+  const app=document.getElementById('g3-app');
+  if(!app)return;
+  if(g3c>=q3.length){g3end(app);return;}
+  const q=q3[g3c];
+  const pct=Math.round((g3c/q3.length)*100);
+  app.innerHTML=`
+    <div class="scorebar">
+      <div class="stat"><div class="v" id="g3sc">${g3s}</div><div class="l">⭐ Points</div></div>
+      <div class="stat"><div class="v" id="g3ti" style="color:#dc2626;">${G3MAX}</div><div class="l">⏱️ Sec</div></div>
+      <div class="stat"><div class="v">${g3c+1}/${q3.length}</div><div class="l">Question</div></div>
+    </div>
+    <div class="progress" style="margin-bottom:6px;"><div id="g3tb" style="height:100%;background:linear-gradient(90deg,#dc2626,#fb923c);border-radius:5px;width:100%;transition:width 0.9s linear;"></div></div>
+    <div class="progress"><div class="progress-fill pf3" style="width:${pct}%"></div></div>
+    <div class="card" style="margin-top:1rem;">
+      <div class="question-lbl">⚡ Choisis vite !</div>
+      <div class="sentence-box">${q.s.replace('___','<span class="blank" id="g3bl">___</span>')}</div>
+      <div class="options">${shuf(q.o).map(o=>`<button class="opt" onclick="g3ch('${o}')">${o}</button>`).join('')}</div>
+      <div class="feedback" id="g3fb" style="display:none"></div>
+      <button class="next-btn" id="g3nx" style="display:none" onclick="g3next()">Suivant →</button>
+    </div>`;
+  g3start();
+}
+function g3start(){
+  g3t=G3MAX;g3a=false;
+  if(g3ti)clearInterval(g3ti);
+  g3ti=setInterval(()=>{
+    g3t--;
+    const el=document.getElementById('g3ti'),bar=document.getElementById('g3tb');
+    if(el)el.textContent=g3t;
+    if(bar)bar.style.width=Math.round((g3t/G3MAX)*100)+'%';
+    if(g3t<=0){clearInterval(g3ti);g3timeout();}
+  },1000);
+}
+function g3timeout(){
+  if(g3a)return;g3a=true;playWrong();
+  const q=q3[g3c];
+  document.querySelectorAll('#g3-app .opt').forEach(b=>{b.disabled=true;if(b.textContent===q.a)b.classList.add('correct');});
+  const fb=document.getElementById('g3fb');fb.style.display='block';
+  fb.className='feedback ko';fb.textContent='⏰ Temps écoulé ! Réponse : '+q.a;
+  document.getElementById('g3nx').style.display='block';
+}
+function g3ch(opt){
+  if(g3a)return;g3a=true;clearInterval(g3ti);
+  const q=q3[g3c];const ok=opt===q.a;
+  const pts=ok?Math.max(1,Math.round(g3t/G3MAX*10)):0;
+  if(ok){g3s+=pts;playCorrect();launchConfetti();}else{playWrong();}
+  document.getElementById('g3bl').textContent=q.a;
+  document.getElementById('g3bl').style.color=ok?'#059669':'#dc2626';
+  document.querySelectorAll('#g3-app .opt').forEach(b=>{
+    b.disabled=true;
+    if(b.textContent===q.a)b.classList.add('correct');
+    else if(b.textContent===opt&&!ok)b.classList.add('wrong');
+  });
+  document.getElementById('g3sc').textContent=g3s;
+  const fb=document.getElementById('g3fb');fb.style.display='block';
+  fb.className='feedback '+(ok?'ok':'ko');
+  fb.textContent=ok?'🎉 Bravo ! +'+pts+' points':'😅 La réponse était : '+q.a;
+  document.getElementById('g3nx').style.display='block';
+}
+function g3next(){g3c++;g3render();}
+function g3end(app){
+  clearInterval(g3ti);
+  const max=q3.length*10,pct=Math.round((g3s/max)*100);
+  const e=pct>=70?'🏆':pct>=40?'🌟':'💪';
+  if(pct>=40){playWin();launchConfetti();}else playWrong();
+  app.innerHTML=`<div class="card end-wrap"><span class="end-emoji">${e}</span><div class="end-title">${pct>=70?'Champion !':pct>=40?'Bien joué !':'Continue !'}</div><div class="end-score">Score : <strong>${g3s} / ${max}</strong> points</div><button class="replay-btn" onclick="g3restart()">↺ Rejouer</button></div>`;
+}
+function g3restart(){g3c=0;g3s=0;if(g3ti)clearInterval(g3ti);g3render();}
+
+// ===== JEU 4 — VRAI/FAUX =====
+const q4=[
+  {s:'Le chat dort sur le tapis.',det:'Le',ok:true,e:'Le = article défini masculin singulier ✓'},
+  {s:'La garçon mange une pomme.',det:'La',ok:false,e:'garçon est masculin → Le garçon'},
+  {s:'Mon amie est gentille.',det:'Mon',ok:true,e:'amie commence par une voyelle → Mon amie ✓'},
+  {s:'Ma sœur est gentille.',det:'Ma',ok:true,e:'sœur est féminin → Ma sœur ✓'},
+  {s:'Il lit un livre.',det:'un',ok:true,e:'un = article indéfini masculin singulier ✓'},
+  {s:"L'arbre est grand.",det:"L'",ok:true,e:"arbre commence par une voyelle → L'arbre ✓"},
+  {s:'Je vois des oiseaux.',det:'des',ok:true,e:'des = article indéfini pluriel ✓'},
+  {s:'Ma garçon joue au foot.',det:'Ma',ok:false,e:'garçon est masculin → Mon garçon'},
+  {s:'Nos amis arrivent demain.',det:'Nos',ok:true,e:'Nos = déterminant possessif pluriel ✓'},
+  {s:'Sa mère appelle le médecin.',det:'Sa',ok:true,e:'Sa = possessif féminin singulier ✓'},
+  {s:'Le filles dansent.',det:'Le',ok:false,e:'filles est pluriel → Les filles'},
+  {s:'Ta trousse est rouge.',det:'Ta',ok:true,e:'Ta = déterminant possessif féminin singulier ✓'},
+];
+let g4c=0,g4s=0,g4a=false;
+function g4render(){
+  const app=document.getElementById('g4-app');
+  if(!app)return;
+  if(g4c>=q4.length){g4end(app);return;}
+  const q=q4[g4c];
+  const pct=Math.round((g4c/q4.length)*100);
+  app.innerHTML=`
+    <div class="scorebar">
+      <div class="stat"><div class="v">${g4s}</div><div class="l">⭐ Points</div></div>
+      <div class="stat"><div class="v">${g4c+1}/${q4.length}</div><div class="l">Question</div></div>
+    </div>
+    <div class="progress"><div class="progress-fill pf4" style="width:${pct}%"></div></div>
+    <div class="card" style="margin-top:1rem;">
+      <div class="question-lbl">Le déterminant en vert est-il correct ?</div>
+      <div class="sentence-box"><strong style="font-size:23px;color:#059669;text-decoration:underline;">${q.det}</strong> ${q.s.slice(q.det.length)}</div>
+      <div style="display:flex;gap:14px;justify-content:center;margin-top:1.3rem;">
+        <button class="opt" style="font-size:18px;padding:14px 40px;background:#d1fae5;border-color:#059669;color:#065f46;" onclick="g4ans(true)">✓ Vrai</button>
+        <button class="opt" style="font-size:18px;padding:14px 40px;background:#fee2e2;border-color:#dc2626;color:#7f1d1d;" onclick="g4ans(false)">✗ Faux</button>
+      </div>
+      <div class="feedback" id="g4fb" style="display:none"></div>
+      <button class="next-btn" id="g4nx" style="display:none" onclick="g4next()">Suivant →</button>
+    </div>`;
+}
+function g4ans(ans){
+  if(g4a)return;g4a=true;
+  const q=q4[g4c];const ok=ans===q.ok;
+  if(ok){g4s++;playCorrect();launchConfetti();}else{playWrong();}
+  document.querySelectorAll('#g4-app .opt').forEach(b=>b.disabled=true);
+  const fb=document.getElementById('g4fb');fb.style.display='block';
+  fb.className='feedback '+(ok?'ok':'ko');
+  fb.textContent=(ok?'🎉 Correct ! ':'😅 Non ! ')+q.e;
+  document.getElementById('g4nx').style.display='block';
+}
+function g4next(){g4c++;g4a=false;g4render();}
+function g4end(app){
+  const pct=Math.round((g4s/q4.length)*100);
+  const e=pct>=80?'🏆':pct>=60?'🌟':'💪';
+  if(pct>=60){playWin();launchConfetti();}else playWrong();
+  app.innerHTML=`<div class="card end-wrap"><span class="end-emoji">${e}</span><div class="end-title">${pct>=80?'Excellent !':pct>=60?'Bien joué !':'Continue !'}</div><div class="end-score">Score : <strong>${g4s} / ${q4.length}</strong> (${pct}%)</div><button class="replay-btn" onclick="g4restart()">↺ Rejouer</button></div>`;
+}
+function g4restart(){g4c=0;g4s=0;g4a=false;g4render();}
+
+// ===== JEU 5 — ÉQUIPES A & B =====
+const q5=[
+  {q:'Quel article défini devant "chat" ?',a:'le',o:['le','la','les','un']},
+  {q:'Quel article devant "fleurs" (pluriel) ?',a:'les',o:['le','la','les','une']},
+  {q:'Mon ou Ma devant "trousse" ?',a:'ma',o:['mon','ma','mes','ta']},
+  {q:'Quel article indéfini devant "livre" (masc.) ?',a:'un',o:['un','une','des','le']},
+  {q:'Son ou Sa devant "front" (masc.) ?',a:'son',o:['son','sa','ses','mon']},
+  {q:'Quel article devant "école" (voyelle) ?',a:"l'",o:["l'",'le','la','les']},
+  {q:'Ton ou Ta devant "père" ?',a:'ton',o:['mon','ton','ta','tes']},
+  {q:'Notre ou Nos devant "maison" (sing.) ?',a:'notre',o:['notre','nos','votre','leur']},
+  {q:'Quel article indéfini devant "amie" (fém.) ?',a:'une',o:['un','une','des','la']},
+  {q:'Sa ou Ses devant "joues" (pluriel) ?',a:'ses',o:['son','sa','ses','mes']},
+  {q:'Leur ou Leurs devant "fleurs" (pluriel) ?',a:'leurs',o:['leur','leurs','nos','ses']},
+  {q:'Quel article défini devant "arbre" (voyelle) ?',a:"l'",o:["l'",'le','la','les']},
+];
+let g5i=0,g5sc=[0,0],g5tm=0,g5a=false;
+const g5col=['#1a5cb8','#dc2626'],g5nm=['Équipe A 🔵','Équipe B 🔴'];
+function g5render(){
+  const app=document.getElementById('g5-app');
+  if(!app)return;
+  if(g5i>=q5.length){g5end(app);return;}
+  const q=q5[g5i];
+  app.innerHTML=`
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1rem;">
+      <div class="stat" style="border:3px solid ${g5tm===0?'#1a5cb8':'#e2e8f0'};transition:all 0.3s;"><div class="v" style="color:#1a5cb8;">${g5sc[0]}</div><div class="l">⭐ Équipe A</div></div>
+      <div class="stat" style="border:3px solid ${g5tm===1?'#dc2626':'#e2e8f0'};transition:all 0.3s;"><div class="v" style="color:#dc2626;">${g5sc[1]}</div><div class="l">⭐ Équipe B</div></div>
+    </div>
+    <div style="text-align:center;margin-bottom:1rem;">
+      <span style="background:${g5col[g5tm]};color:#fff;border-radius:20px;padding:8px 24px;font-weight:900;font-size:16px;display:inline-block;animation:bounceIn 0.4s ease-out;">Tour de ${g5nm[g5tm]}</span>
+    </div>
+    <div class="progress"><div class="progress-fill pf5" style="width:${Math.round(g5i/q5.length*100)}%"></div></div>
+    <div class="card" style="margin-top:1rem;">
+      <div class="question-lbl">${q.q}</div>
+      <div class="options" style="margin-top:1rem;">${shuf(q.o).map(o=>`<button class="opt" onclick="g5ch('${o}')">${o}</button>`).join('')}</div>
+      <div class="feedback" id="g5fb" style="display:none"></div>
+      <button class="next-btn" id="g5nx" style="display:none" onclick="g5next()">Question suivante →</button>
+    </div>`;
+}
+function g5ch(opt){
+  if(g5a)return;g5a=true;
+  const q=q5[g5i];const ok=opt===q.a;
+  if(ok){g5sc[g5tm]++;playCorrect();launchConfetti();}else{playWrong();}
+  document.querySelectorAll('#g5-app .opt').forEach(b=>{
+    b.disabled=true;
+    if(b.textContent===q.a)b.classList.add('correct');
+    else if(b.textContent===opt&&!ok)b.classList.add('wrong');
+  });
+  const fb=document.getElementById('g5fb');fb.style.display='block';
+  fb.className='feedback '+(ok?'ok':'ko');
+  fb.textContent=ok?'🎉 Bonne réponse ! +1 point pour '+g5nm[g5tm]:'😅 La réponse était : '+q.a;
+  document.getElementById('g5nx').style.display='block';
+}
+function g5next(){g5i++;g5a=false;g5tm=g5i%2;g5render();}
+function g5end(app){
+  const[a,b]=g5sc;
+  const w=a>b?'🎉 Équipe A gagne !':b>a?'🎉 Équipe B gagne !':'🤝 Match nul !';
+  playWin();launchConfetti();
+  app.innerHTML=`<div class="card end-wrap"><span class="end-emoji">🏆</span><div class="end-title">${w}</div><div class="end-score">Équipe A 🔵 : <strong>${a} pts</strong> &nbsp;|&nbsp; Équipe B 🔴 : <strong>${b} pts</strong></div><button class="replay-btn" onclick="g5restart()">↺ Rejouer</button></div>`;
+}
+function g5restart(){g5i=0;g5sc=[0,0];g5tm=0;g5a=false;g5render();}
+</script>
+</body>
+</html>
